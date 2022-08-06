@@ -1,41 +1,49 @@
-package com.simonkucher.ecommerce.domain.models;
+package com.simonkucher.ecommerce.entity.models;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "category")
-public class Category {
+@Entity(name = "product")
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "name")
-	private String name;
+	@Column(name = "code")
+	private String code;
+
+	@Column(name = "description")
+	private String description;
+
+	@Column(name = "quantity")
+	private int quantity;
+
+	@Column(name = "image")
+	private byte[] image;
+
+	@Column(name = "price")
+	private double price;
 
 	@Column(name = "last_update")
 	private Date lastUpdate;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name="category_id")
-	private List<Product> products = new ArrayList<>();
+	@Column(name = "category_id")
+	private int categoryId;
 
 }
